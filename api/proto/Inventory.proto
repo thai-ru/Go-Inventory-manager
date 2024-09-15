@@ -1,0 +1,94 @@
+syntax = "proto3";
+
+package inventory;
+option go_package= "./pb";
+
+import "google/api/annotations.proto";
+
+
+message Item {
+  string id = 1;
+  string name = 2;
+  int32 quantity = 3;
+  string description = 4;
+}
+
+message AddItemRequest {
+  Item item = 1;
+}
+
+message AddItemResponse {
+  string message = 1;
+  string id = 2;
+
+}
+
+message UpdateItemRequest {
+  Item item = 1;
+}
+
+message UpdateItemResponse {
+  bool success = 1;
+}
+
+message GetItemRequest {
+  string id = 1;
+}
+
+message GetItemResponse {
+  Item item = 1;
+}
+
+message ListItemsRequest {}
+
+message ListItemsResponse {
+  repeated Item items = 1;
+}
+
+message DeleteItemRequest {
+  string id = 1;
+}
+
+message DeleteItemResponse {
+  bool success = 1;
+}
+
+service InventoryService {
+  // Add a new item to the inventory
+  rpc AddItem(AddItemRequest) returns (AddItemResponse) {
+    option (google.api.http) = {
+      post: "/v1/items"
+      body: "item"
+    };
+  }
+
+//  Get a single item in the inventory
+  rpc GetItem(GetItemRequest) returns (GetItemResponse) {
+    option (google.api.http) = {
+      get: "/v1/item"
+      body: "item"
+    };
+  }
+
+  // Update an existing item
+  rpc UpdateItem(UpdateItemRequest) returns (UpdateItemResponse) {
+    option (google.api.http) = {
+      put: "/v1/items/{item.id}"
+      body: "item"
+    };
+  }
+
+  // Get the list of items
+  rpc ListItems(ListItemsRequest) returns (ListItemsResponse) {
+    option (google.api.http) = {
+      get: "/v1/items"
+    };
+  }
+
+  // Delete an item from the inventory
+  rpc DeleteItem(DeleteItemRequest) returns (DeleteItemResponse) {
+    option (google.api.http) = {
+      delete: "/v1/items/{id}"
+    };
+  }
+}
