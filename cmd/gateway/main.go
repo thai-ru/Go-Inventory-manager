@@ -35,6 +35,8 @@ func run() error {
 		Handler: mux,
 	}
 
+	log.Println("HTTP server is running on port :8080")
+
 	// Graceful shutdown
 	go func() {
 		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
