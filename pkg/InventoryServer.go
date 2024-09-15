@@ -19,6 +19,14 @@ func (s *Server) AddItem(ctx context.Context, req *pb.AddItemRequest) (*pb.AddIt
 	return &pb.AddItemResponse{Id: id}, nil
 }
 
+func (s *Server) GetItem(ctx context.Context, req *pb.GetItemRequest) (*pb.GetItemResponse, error) {
+	item, exists := s.Items[req.Id]
+	if !exists {
+		return nil, errors.New("item not found")
+	}
+	return &pb.GetItemResponse{Item: item}, nil
+}
+
 func (s *Server) UpdateItem(ctx context.Context, req *pb.UpdateItemRequest) (*pb.UpdateItemResponse, error) {
 	if _, exists := s.Items[req.Item.Id]; !exists {
 		return nil, errors.New("item not found")

@@ -32,6 +32,8 @@ const (
 type InventoryServiceClient interface {
 	// Add a new item to the inventory
 	AddItem(ctx context.Context, in *AddItemRequest, opts ...grpc.CallOption) (*AddItemResponse, error)
+	//	Get a single item in the inventory
+	//
 	// Get a single item in the inventory
 	GetItem(ctx context.Context, in *GetItemRequest, opts ...grpc.CallOption) (*GetItemResponse, error)
 	// Update an existing item
@@ -101,6 +103,8 @@ func (c *inventoryServiceClient) DeleteItem(ctx context.Context, in *DeleteItemR
 type InventoryServiceServer interface {
 	// Add a new item to the inventory
 	AddItem(context.Context, *AddItemRequest) (*AddItemResponse, error)
+	//	Get a single item in the inventory
+	//
 	// Get a single item in the inventory
 	GetItem(context.Context, *GetItemRequest) (*GetItemResponse, error)
 	// Update an existing item

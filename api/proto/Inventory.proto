@@ -63,10 +63,10 @@ service InventoryService {
   }
 
 //  Get a single item in the inventory
+  // Get a single item in the inventory
   rpc GetItem(GetItemRequest) returns (GetItemResponse) {
     option (google.api.http) = {
-      get: "/v1/item"
-      body: "item"
+      get: "/v1/items/{id}"
     };
   }
 
