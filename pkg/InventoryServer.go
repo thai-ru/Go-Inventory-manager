@@ -9,7 +9,7 @@ import (
 
 type Server struct {
 	pb.UnimplementedInventoryServiceServer
-	Items map[string]*pb.Item // Exported field
+	Items map[string]*pb.Item
 }
 
 func (s *Server) AddItem(ctx context.Context, req *pb.AddItemRequest) (*pb.AddItemResponse, error) {
